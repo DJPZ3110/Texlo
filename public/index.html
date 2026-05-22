@@ -1,1 +1,129 @@
+<!DOCTYPE html>
 
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Texlo - Cahier de Texte Numérique</title>
+
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+
+    <!-- L'application sera montée ici dynamiquement -->
+
+    <div id="app">
+
+        <!-- Vue de connexion par défaut -->
+
+        <div id="auth-view" class="view active">
+
+            <div class="login-wrapper">
+
+                <div class="login-card">
+
+                    <h2>Connexion à Texlo</h2>
+
+                    <form id="login-form">
+
+                        <div class="form-group">
+
+                            <label for="matricule">Matricule</label>
+
+                            <input type="text" id="matricule" placeholder="Ex: ENS-2024-0421" required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="password">Mot de passe</label>
+
+                            <input type="password" id="password" placeholder="••••••••" required>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Se connecter</button>
+
+                        <p style="text-align:center; margin-top:12px; font-size:13px;">
+
+                            <a href="#" id="reset-password-link" style="color:var(--color-accent);">Mot de passe oublié ?</a>
+
+                        </p>
+
+                    </form>
+
+                    <div id="login-error" style="color:var(--color-danger); text-align:center; margin-top:8px; display:none;"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Les autres vues seront injectées ici plus tard -->
+
+        <div id="dashboard-view" class="view" style="display:none;">
+
+            <!-- Sera rempli dynamiquement -->
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Firebase SDKs (modulaire, depuis CDN) -->
+
+    <script type="module">
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+
+
+        // Configuration Firebase (à remplacer par vos propres valeurs)
+
+        const firebaseConfig = {
+
+            apiKey: "AIza...",
+
+            authDomain: "texlo.firebaseapp.com",
+
+            projectId: "texlo",
+
+            storageBucket: "texlo.appspot.com",
+
+            messagingSenderId: "...",
+
+            appId: "..."
+
+        };
+
+
+
+        window.app = initializeApp(firebaseConfig);
+
+        window.auth = getAuth(window.app);
+
+
+
+        // Les modules de notre application
+
+        import './scripts/auth.js';
+
+        import './scripts/ui.js';
+
+        import './scripts/app.js';
+
+    </script>
+
+</body>
+
+</html>
