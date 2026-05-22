@@ -1,2 +1,2 @@
-# Textbook
+# Texlo
 Cahier de texte numérique 
