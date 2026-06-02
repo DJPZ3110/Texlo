@@ -1,20 +1,27 @@
-// auth.js – Gestion de l'authentification
-import { getAuth, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { Account } from 'https://cdn.jsdelivr.net/npm/appwrite@latest/+esm';
 
-export const auth = getAuth();
+const account = new Account(window.appwriteClient);
 
-// Fonction de connexion avec matricule
 export async function loginWithMatricule(matricule, password) {
-    const email = `${matricule}@texlo.app`; // transformation pour Firebase Auth
+    const email = `${matricule}@texlo.app`;
+    return await account.createEmailSession(email, password);
+}
+
+export async function getCurrentUser() {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        return userCredential.user;
-    } catch (error) {
-        throw error;
+        return await account.get();
+    } catch {
+        return null;
     }
 }
 
-// Déconnexion
 export async function logout() {
-    await signOut(auth);
+    await account.deleteSession('current');
+}
+
+export function onAuthStateChanged(callback) {
+    setInterval(async () => {
+        const user = await getCurrentUser();
+        callback(user);
+    }, 3000);
 }
