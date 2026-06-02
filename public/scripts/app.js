@@ -1,19 +1,11 @@
-// app.js – Point d'entrée principal de l'application Texlo
-import { auth } from './auth.js';
-import { showView } from './ui.js';
+import { onAuthStateChanged } from './auth.js';
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-    // Par défaut, on affiche la vue de connexion
-    showView('auth');
-
-    // Vérifier si l'utilisateur est déjà connecté
-    auth.onAuthStateChanged(user => {
+    onAuthStateChanged((user) => {
         if (user) {
-            // Rediriger vers le tableau de bord (à implémenter)
-            showView('dashboard');
+            window.switchView('admin');
         } else {
-            showView('auth');
+            window.switchView('connexion');
         }
     });
 });
