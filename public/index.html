@@ -60,33 +60,120 @@
                 <div class="stat-card"><div class="stat-icon red"><i class="fas fa-clock"></i></div><div><div class="stat-value">3</div><div class="stat-label">Absences non justifiées</div></div></div>
                 <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-check-circle"></i></div><div><div class="stat-value">94%</div><div class="stat-label">Taux de présence</div></div></div>
             </div>
-            <!-- Tableau enseignants et autres éléments comme dans la maquette (gardez le même contenu HTML que vous aviez, je le reproduis partiellement par souci de lisibilité) -->
-            <!-- Pour le reste du dashboard, copiez intégralement le contenu entre les commentaires "VUE ADMIN DASHBOARD" de votre code précédent, je le mets en résumé ici -->
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-user-friends"></i> Corps enseignant</span>
+                    <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Ajouter</button>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <table>
+                        <thead><tr><th>Matricule</th><th>Nom</th><th>Email</th><th>Dernière connexion</th><th></th></tr></thead>
+                        <tbody>
+                            <tr><td>ENS-2024-0421</td><td>Jean Dupont</td><td>j.dupont@ecole.fr</td><td>22/05/2026 14:05</td><td><button class="btn btn-outline btn-sm">Profil</button></td></tr>
+                            <tr><td>ENS-2024-0832</td><td>Marie Lambert</td><td>m.lambert@ecole.fr</td><td>22/05/2026 08:12</td><td><button class="btn btn-outline btn-sm">Profil</button></td></tr>
+                            <tr><td>ENS-2024-0567</td><td>Paul Biya</td><td>p.biya@ecole.fr</td><td>21/05/2026 17:30</td><td><button class="btn btn-outline btn-sm">Profil</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="fas fa-exclamation-triangle"></i> Justificatifs en attente</div>
+                <div class="card-body">
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-red"></div>
+                        <div><strong>20/05</strong> - Jean Dupont (Maths) <span class="badge badge-danger">Absent</span></div>
+                        <button class="btn btn-outline btn-sm" style="margin-left:auto;">Examiner</button>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot dot-amber"></div>
+                        <div><strong>19/05</strong> - Marie Lambert (Physique) <span class="badge badge-warning">En attente</span></div>
+                        <button class="btn btn-outline btn-sm" style="margin-left:auto;">Examiner</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Vue Sections (idem, reproduisez le contenu original) -->
-        <div id="view-sections" class="view">...</div>
+        <!-- Vue Sections -->
+        <div id="view-sections" class="view">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-book-open"></i> Mes sections actives</span>
+                    <button class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Nouvelle section</button>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <table>
+                        <thead><tr><th>Section</th><th>Matière</th><th>Responsable</th><th>Partagée</th><th>Créneaux</th><th></th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Terminale C - Gr A</strong></td><td>Maths</td><td>Jean Dupont</td><td>-</td><td>Lun 8-10, Mer 14-16</td><td><button class="btn btn-outline btn-sm">Modifier</button></td></tr>
+                            <tr><td><strong>1ère S - Gr 1</strong></td><td>Informatique</td><td>Jean Dupont</td><td>M. Lambert</td><td>Mar 10-12, Jeu 8-10</td><td><button class="btn btn-outline btn-sm">Modifier</button></td></tr>
+                            <tr><td><strong>2nde A</strong></td><td>Anglais</td><td>Marie Lambert</td><td>-</td><td>Lun 14-16, Ven 10-12</td><td><button class="btn btn-outline btn-sm">Modifier</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><i class="fas fa-calendar-alt"></i> Créneaux de "Terminale C - Gr A"</div>
+                <div class="card-body">
+                    <div class="slot-list">
+                        <div class="slot-chip"><i class="far fa-clock"></i> Lun 08:00-10:00 <i class="fas fa-pen edit-slot"></i><i class="fas fa-times delete-slot"></i></div>
+                        <div class="slot-chip"><i class="far fa-clock"></i> Mer 14:00-16:00 <i class="fas fa-pen edit-slot"></i><i class="fas fa-times delete-slot"></i></div>
+                        <div class="slot-chip" style="border-style:dashed; background:transparent; cursor:pointer;"><i class="fas fa-plus"></i> Ajouter exception</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Vue Justificatif (idem) -->
-        <div id="view-justificatif" class="view">...</div>
+        <!-- Vue Justificatif -->
+        <div id="view-justificatif" class="view">
+            <div class="card" style="max-width:700px;">
+                <div class="card-header"><i class="fas fa-upload"></i> Déposer un justificatif</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <label>Séance concernée</label>
+                        <select class="input-field">
+                            <option>22/05/2026 - 14:00 Informatique (Absent)</option>
+                            <option>20/05/2026 - 08:00 Mathématiques (Absent)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Motif détaillé</label>
+                        <textarea class="input-field" rows="3" placeholder="Expliquez la raison de votre absence..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Pièce jointe (PDF, image)</label>
+                        <input type="file" class="input-field" style="padding:0.6rem;">
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Soumettre</button>
+                </div>
+            </div>
+            <div class="card" style="max-width:700px;">
+                <div class="card-header"><i class="fas fa-history"></i> Historique</div>
+                <div class="card-body" style="padding:0;">
+                    <table>
+                        <thead><tr><th>Date</th><th>Séance</th><th>Statut</th></tr></thead>
+                        <tbody>
+                            <tr><td>20/05/2026</td><td>Maths 8-10</td><td><span class="badge badge-success">Accepté</span></td></tr>
+                            <tr><td>18/05/2026</td><td>Physique 10-12</td><td><span class="badge badge-warning">En attente</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scripts externes -->
     <script type="module">
         import appwriteConfig from './scripts/config.js';
         import { Client, Account } from 'https://cdn.jsdelivr.net/npm/appwrite@latest/+esm';
 
-        // Initialisation du client Appwrite
         const client = new Client()
             .setEndpoint(appwriteConfig.endpoint)
             .setProject(appwriteConfig.projectId);
         window.appwriteClient = client;
         window.appwriteAccount = new Account(client);
 
-        // Import des modules internes
         import './scripts/auth.js';
         import './scripts/ui.js';
         import './scripts/app.js';
     </script>
 </body>
-</html>
+                                 </html>
