@@ -1,129 +1,92 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Texlo - Cahier de Texte Numérique</title>
-
+    <title>EduPlanner • Cahier de Texte Intelligent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
-
 </head>
-
 <body>
+    <header class="app-header">
+        <div class="logo"><i class="fas fa-graduation-cap"></i> EduPlanner</div>
+        <nav class="nav-links" id="mainNav">
+            <button class="nav-btn active" data-view="connexion"><i class="fas fa-lock"></i> Connexion</button>
+            <button class="nav-btn" data-view="admin"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+            <button class="nav-btn" data-view="sections"><i class="fas fa-layer-group"></i> Sections</button>
+            <button class="nav-btn" data-view="justificatif"><i class="fas fa-file-medical-alt"></i> Justificatif</button>
+        </nav>
+        <div class="user-badge" id="userBadge" style="display:none;">
+            <div class="user-avatar">JD</div>
+            <span>Jean Dupont</span>
+        </div>
+    </header>
 
-    <!-- L'application sera montée ici dynamiquement -->
-
-    <div id="app">
-
-        <!-- Vue de connexion par défaut -->
-
-        <div id="auth-view" class="view active">
-
+    <div class="main-container">
+        <!-- Vue Connexion -->
+        <div id="view-connexion" class="view active">
             <div class="login-wrapper">
-
                 <div class="login-card">
-
-                    <h2>Connexion à Texlo</h2>
-
+                    <i class="fas fa-user-circle" style="font-size:3rem; color:var(--primary); margin-bottom:0.5rem;"></i>
+                    <h2>Espace Enseignant</h2>
+                    <p class="subtitle">Connectez-vous pour gérer vos cahiers de texte</p>
                     <form id="login-form">
-
-                        <div class="form-group">
-
-                            <label for="matricule">Matricule</label>
-
-                            <input type="text" id="matricule" placeholder="Ex: ENS-2024-0421" required>
-
+                        <div class="input-group">
+                            <label><i class="fas fa-id-card"></i> Matricule</label>
+                            <input class="input-field" type="text" id="matricule" placeholder="Ex: ENS-2024-0421" required>
                         </div>
-
-                        <div class="form-group">
-
-                            <label for="password">Mot de passe</label>
-
-                            <input type="password" id="password" placeholder="••••••••" required>
-
+                        <div class="input-group">
+                            <label><i class="fas fa-key"></i> Mot de passe</label>
+                            <input class="input-field" type="password" id="password" placeholder="••••••••" required>
                         </div>
-
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Se connecter</button>
-
-                        <p style="text-align:center; margin-top:12px; font-size:13px;">
-
-                            <a href="#" id="reset-password-link" style="color:var(--color-accent);">Mot de passe oublié ?</a>
-
-                        </p>
-
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Se connecter</button>
+                        <div id="login-error" style="color:var(--danger); text-align:center; margin-top:0.8rem; display:none;"></div>
                     </form>
-
-                    <div id="login-error" style="color:var(--color-danger); text-align:center; margin-top:8px; display:none;"></div>
-
+                    <p style="margin-top:1rem; font-size:0.85rem;">
+                        <a href="#" style="color:var(--primary); text-decoration:none; font-weight:500;">Mot de passe oublié ?</a>
+                    </p>
                 </div>
-
             </div>
-
         </div>
 
-        <!-- Les autres vues seront injectées ici plus tard -->
-
-        <div id="dashboard-view" class="view" style="display:none;">
-
-            <!-- Sera rempli dynamiquement -->
-
+        <!-- Vue Dashboard Admin -->
+        <div id="view-admin" class="view">
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-chalkboard-teacher"></i></div><div><div class="stat-value">12</div><div class="stat-label">Enseignants actifs</div></div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fas fa-users"></i></div><div><div class="stat-value">8</div><div class="stat-label">Sections</div></div></div>
+                <div class="stat-card"><div class="stat-icon red"><i class="fas fa-clock"></i></div><div><div class="stat-value">3</div><div class="stat-label">Absences non justifiées</div></div></div>
+                <div class="stat-card"><div class="stat-icon amber"><i class="fas fa-check-circle"></i></div><div><div class="stat-value">94%</div><div class="stat-label">Taux de présence</div></div></div>
+            </div>
+            <!-- Tableau enseignants et autres éléments comme dans la maquette (gardez le même contenu HTML que vous aviez, je le reproduis partiellement par souci de lisibilité) -->
+            <!-- Pour le reste du dashboard, copiez intégralement le contenu entre les commentaires "VUE ADMIN DASHBOARD" de votre code précédent, je le mets en résumé ici -->
         </div>
 
+        <!-- Vue Sections (idem, reproduisez le contenu original) -->
+        <div id="view-sections" class="view">...</div>
+
+        <!-- Vue Justificatif (idem) -->
+        <div id="view-justificatif" class="view">...</div>
     </div>
 
-
-
-    <!-- Firebase SDKs (modulaire, depuis CDN) -->
-
+    <!-- Scripts externes -->
     <script type="module">
+        import appwriteConfig from './scripts/config.js';
+        import { Client, Account } from 'https://cdn.jsdelivr.net/npm/appwrite@latest/+esm';
 
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        // Initialisation du client Appwrite
+        const client = new Client()
+            .setEndpoint(appwriteConfig.endpoint)
+            .setProject(appwriteConfig.projectId);
+        window.appwriteClient = client;
+        window.appwriteAccount = new Account(client);
 
-        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-
-
-
-        // Configuration Firebase (à remplacer par vos propres valeurs)
-       
-       // Your web app's Firebase configuration
-       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-       const firebaseConfig = {
-         apiKey: "AIzaSyAYyZgn-AsiS1zeuhUn-0XbK_GZQCqLNMk",
-         authDomain: "texlo-82d58.firebaseapp.com",
-         projectId: "texlo-82d58",
-         storageBucket: "texlo-82d58.firebasestorage.app",
-         messagingSenderId: "1004809511524",
-         appId: "1:1004809511524:web:da193df2b259f6903cf571",
-         measurementId: "G-6FB9EZYX9Z"
-       };
-
-       // Initialize Firebase
-       const app = initializeApp(firebaseConfig);
-       const analytics = getAnalytics(app);
-
-
-
-        window.app = initializeApp(firebaseConfig);
-
-        window.auth = getAuth(window.app);
-
-
-
-        // Les modules de notre application
-
+        // Import des modules internes
         import './scripts/auth.js';
-
         import './scripts/ui.js';
-
         import './scripts/app.js';
-
     </script>
-
 </body>
-
 </html>
